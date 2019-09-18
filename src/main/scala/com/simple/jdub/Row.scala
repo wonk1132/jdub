@@ -5,7 +5,7 @@ import org.joda.time.{DateTime, DateTimeZone}
 import java.io.{InputStream, Reader}
 import java.net.URL
 import java.sql.{Blob, Clob, Date, NClob, Ref, ResultSet, SQLXML, Time, Timestamp}
-import java.time.{Instant, LocalDateTime}
+import java.time.{Instant, LocalDateTime, LocalDate}
 import java.util.UUID
 
 /**
@@ -174,6 +174,11 @@ class Row(rs: ResultSet) {
     * Extract the value with the given name as an Option[LocalDateTime].
     */
   def localDateTime(name: String): Option[LocalDateTime] = timestamp(name).map(_.toLocalDateTime)
+
+  /**
+    * Extract the value with the given name as an Option[LocalDate].
+    */
+  def localDate(name: String): Option[LocalDate] = extract(rs.getDate(name).toLocalDate)
 
   /**
    * Extract the value with the given name as an Option[DateTime].
